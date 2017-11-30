@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>找回密码</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
+    <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
+    <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+
+<body>
+<div data-role="page" id="page1">
+    <div data-role="header">
+        <a href="../Index/index.html" data-ajax="false" data-role="button" data-icon="home">首页</a>
+        <a href="../user/login.html" data-ajax="false" data-role="button" data-icon="info">登录</a>
+        <h3 id="reg"> 找回密码 </h3>
+    </div>
+    <div data-role="content">
+        <form name="findp" method="post" action="changepsw" data-ajax="false">
+            <div data-role="fieldcontain">
+                <label> 密保问题 </label>
+                <input name="question" id="question" placeholder="" value="{$result[0]['user_question']}" type="text" readonly="readonly">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="answer"> 密保答案 </label>
+                <input name="answer" id="answer" placeholder="" value="" type="text" required>
+            </div>
+            <input name="email" id="email" value="{$email}" type="hidden">
+            <div align="center">
+                <input data-inline="true" type="submit" name="submit" value="提交" />
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>
