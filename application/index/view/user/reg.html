@@ -18,10 +18,14 @@
     <h3 id="reg"> 用户注册 </h3>
   </div>
   <div data-role="content">
-    <form name="RegForm" method="post" action="insert2" data-ajax="false">
+    <form name="RegForm" method="post" action="insert" data-ajax="false">
       <div data-role="fieldcontain">
         <label for="username"> 用户名 </label>
         <input name="username" id="username"  value="" type="text" required>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="truename"> 真实姓名 </label>
+        <input name="truename" id="truename" type="text">
       </div>
       <div data-role="fieldcontain">
         <label for="password"> 密码 </label>
@@ -45,6 +49,18 @@
       <div data-role="fieldcontain">
         <label for="email"> 邮箱 </label>
         <input name="email" id="email"  value="" type="email" required>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="qq"> QQ </label>
+        <input name="qq" id="qq"  value="" type="text">
+      </div>
+      <div data-role="fieldcontain">
+        <label for="tel"> 手机号 </label>
+        <input name="tel" id="tel" type="text" required>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="address"> 地址 </label>
+        <input name="address" id="address" type="text">
       </div>
       <div data-role="fieldcontain">
         <label for="question"> 密保问题 </label>
