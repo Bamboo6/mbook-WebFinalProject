@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品搜索</title>
+    <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
+    <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
+    <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="header">
+    <a href="../index.html" data-ajax="false" data-role="button" data-icon="home">首页</a>
+    <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
+    <h3 id="search"> 商品搜索 </h3>
+</div>
+
+<div data-role="content">
+    <form name="search" method="post" action="search" data-ajax="false">
+        <div data-role="fieldcontain">
+            <label for="searching"> 搜索 </label>
+            <input name="searching" id="searching" type="search">
+        </div>
+    </form>
+
+    <div class="container">
+        <!-- 查询BEG -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="me-searchbox">
+                    <form class="form-inline" role="form" method="get">
+                        <div class="form-group">
+                            <label for="phone">手机</label>
+                            <input type="text" class="form-control" name="phone1" placeholder="手机" value="{$phone ? $phone : '';}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">邮箱</label>
+                            <input type="text" class="form-control" name="email1" placeholder="邮箱" value="{$email ? $email : '';}">
+                        </div>
+                        <button type="submit" class="btn btn-default">查询</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- 查询END -->
+
+        <!-- 表格BEG -->
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>ID</th>
+                        <th>妮称</th>
+                        <th>手机</th>
+                        <th>邮箱</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {volist name='list' id='user'}
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>{$user.id}</td>
+                        <td>{$user.nickname}</td>
+                        <td>{$user.phone}</td>
+                        <td>{$user.email}</td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 表格END -->
+        <!-- 分页导航BEG -->
+        <div class="row">
+            <div class="col-xs-12">
+                {$list->render()}
+            </div>
+        </div>
+        <!-- 分页导航END -->
+
+    </div>
+
+</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>意见反馈</title>
+    <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
+    <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
+    <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="header">
+    <a href="../index.html" data-ajax="false" data-role="button" data-icon="home">首页</a>
+    <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
+    <h3 id="feedback1"> 意见反馈 </h3>
+</div>
+<div data-role="page">
+    <div data-role="content">
+        <form method="post" action="feedback" data-ajax="false">
+                <div data-role="fieldcontain">
+                <label for="feedback"> 做得不够的请多担待，欢迎提出您宝贵的建议或意见 </label>
+                <textarea name="feedback" id="feedback"></textarea>
+                    <input type="submit" data-inline="true" value="提交">
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
