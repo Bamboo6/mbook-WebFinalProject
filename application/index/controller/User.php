@@ -5,6 +5,8 @@ use function Sodium\increment;
 use think\Controller;
 use think\Db;
 use think\View;
+use think\Input;
+use Captcha;
 
 class User extends base
 {
@@ -153,6 +155,34 @@ class User extends base
         }else{
             $this->error("<h1>两次输入的密码吻合</h1>","index/user/login");
         }
+    }
+
+    public function logining()
+    {
+        $view = new View();
+        $name = input('request.email');
+        $password  = input('request.password');
+        $data = input('request.captcha');
+        dump($data);
+        if(!captcha_check($data)){
+            //验证失败
+            return $this->error("验证码错误");
+        }
+
+
+        $check=\app\index\model\User::login($name, $password);
+        if ($check) {
+            // header(strtolower("location:"));
+            header(strtolower("location:". config("web_root") . "/mbook/public/index.php"));
+            exit();
+        }
+
+        return $view->fetch('logining');
+    }
+
+    function captcha_img($id = "")
+    {
+        return '<img src="' . captcha_src($id) . '" alt="captcha" />';
     }
 
     public function logindo()

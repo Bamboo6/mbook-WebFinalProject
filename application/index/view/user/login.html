@@ -18,15 +18,19 @@
         <h3 id="reg"> 用户登录 </h3>
     </div>
     <div data-role="content">
-        <form name="RegForm" method="post" action="logindo" data-ajax="false">
+        <form name="RegForm" method="post" action="logining" data-ajax="false">
             <div data-role="fieldcontain">
-                <label for="email"> 邮箱 </label>
-                <input name="email" id="email" type="email" required>
+                <input name="email" placeholder="请输入邮箱" id="email" type="email" required>
             </div>
             <div data-role="fieldcontain">
-                <label for="password"> 密码 </label>
-                <input name="password" id="password" type="password" required>
+                <input name="password" placeholder="请输入密码" id="password" type="password" required>
             </div>
+            <!--<div data-role="fieldcontain">-->
+                <input placeholder="请输入验证码" name="captcha" class="captcha">
+                <div align="center">
+                    <img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}'" width="200px" height="100px"/>
+                </div>
+            <!--</div>-->
             <div align="center">
                 <input data-inline="true" type="submit" name="submit" value="提交" />
                 <a href="../user/forgotpsw.html" data-ajax="false">忘记了密码？</a>

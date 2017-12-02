@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>商品搜索</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
     <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
     <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
@@ -16,19 +15,14 @@
 </div>
 
 <div data-role="content">
-    <ul data-role="listview"  data-inset="true" >
-        {volist name='blist' id='bdata'}
-        <li>
-            <a data-ajax="false" href="book?book_id={$bdata.book_id}">
-                <img src="/mbook/public/static/images/{$bdata.book_img}"  />
-                <span>{$bdata.book_name}</span><br/>
-                <span>原价：￥{$bdata.book_oldprice|round=2}</span><br/>
-                <span  style="color:#F09">折后价：￥{$bdata.book_newprice|round=2}</span>
-            </a>
-        </li>
-        {/volist}
-    </ul>
-    <div>{$page}</div>
+    <form name="search" method="post" action="search" data-ajax="false">
+        <div data-role="fieldcontain">
+            <input name="searching" id="searching" type="search">
+            <div align="center">
+                <input data-inline="true" data-icon="search" data-iconpos="left" name="submit" type="submit" value="搜索">
+            </div>
+        </div>
+    </form>
 
 </div>
 
