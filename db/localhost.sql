@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: 2017-12-02 01:46:09
+-- Generation Time: 2017-12-03 01:21:42
 -- 服务器版本： 5.6.35
 -- PHP Version: 7.1.8
 
@@ -110,6 +110,14 @@ CREATE TABLE `tb_feedback` (
   `feedback_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- 转存表中的数据 `tb_feedback`
+--
+
+INSERT INTO `tb_feedback` (`feedback_id`, `feedback_info`, `feedback_date`) VALUES
+(1, '123', '0000-00-00'),
+(2, '1233', '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
@@ -199,7 +207,8 @@ INSERT INTO `tb_user` (`user_id`, `user_name`, `user_truename`, `user_pwd`, `use
 (1, 'a', NULL, '76d80224611fc919a5d54f0ff9fba446', 'a@aa.com', '', '', NULL, NULL, NULL, NULL, '1', '2'),
 (2, 'q', NULL, 'b2ca678b4c936f905fb82f2733f5297f', 'qq@qwe.com', 'ma', '123', '12', '1234', NULL, NULL, '', ''),
 (3, 'w', 'w', '4eae35f1b35977a00ebd8086c259d4c9', 'w@qq.com', 'ma', '34', '23', 'www', NULL, NULL, 'w', 'w'),
-(4, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@qq.com', 'male', 'admin', 'admin', 'admin', NULL, NULL, 'admin', 'admin');
+(4, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@qq.com', 'male', 'admin', 'admin', 'admin', NULL, NULL, 'admin', 'admin'),
+(5, '请问', '请问', '76d80224611fc919a5d54f0ff9fba446', 'qwe@baidu.com', 'male', '123', 'qwe', '请问', NULL, NULL, '请问', '请问');
 
 --
 -- Indexes for dumped tables
@@ -260,7 +269,7 @@ ALTER TABLE `tb_book`
 -- 使用表AUTO_INCREMENT `tb_feedback`
 --
 ALTER TABLE `tb_feedback`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- 使用表AUTO_INCREMENT `tb_order`
 --
@@ -275,7 +284,7 @@ ALTER TABLE `tb_smalltype`
 -- 使用表AUTO_INCREMENT `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户Id', AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户Id', AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
