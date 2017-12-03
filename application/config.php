@@ -201,15 +201,16 @@ return [
     // +----------------------------------------------------------------------
 
     'session'                => [
-        'id'             => '',
+        /*'id'             => '',
         // SESSION_ID的提交变量,解决flash上传跨域
         'var_session_id' => '',
         // SESSION 前缀
         'prefix'         => 'think',
         // 驱动方式 支持redis memcache memcached
         'type'           => '',
-        // 是否自动开启 SESSION
+        // 是否自动开启 SESSION*/
         'auto_start'     => true,
+        'expire' => 1800,
     ],
 
     // +----------------------------------------------------------------------
@@ -232,5 +233,12 @@ return [
         'setcookie' => true,
     ],
 
+    //分页配置
+    'paginate'               => [
+        'type'      => 'Bootstrap3',
+        'var_page'  => 'page',
+    ],
+
+    "web_root"       => "/mbook/public/index.php",
 
 ];

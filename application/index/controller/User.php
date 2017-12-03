@@ -8,15 +8,24 @@ use think\View;
 use think\Input;
 use Captcha;
 
-class User extends base
+class User extends Controller
 {
 	//显示注册页面
 	public function reg(){		
 		return $this->fetch();
 	}
 
-    public function login(){
+    public function info(){
+        if (!session('?ext_user')) {
+            header(strtolower("location: "."/mbook/public/index.php"."/index/user/login"));
+            exit();
+        }
         return $this->fetch();
+    }
+
+    public function login(){
+        $view = new View();
+        return $view->fetch('login');
     }
 
     public function forgotpsw(){
@@ -173,7 +182,7 @@ class User extends base
         $check=\app\index\model\User::login($name, $password);
         if ($check) {
             // header(strtolower("location:"));
-            header(strtolower("location:". config("web_root") . "/mbook/public/index.php"));
+            header(strtolower("location: "."/mbook/public/index.php"."/index/Index/index.html"));
             exit();
         }
 
@@ -204,34 +213,16 @@ class User extends base
 
     }
 
-/*<?php
-header ( "content-type:text/html;charset=utf-8" );
-if (! isset ( $_SESSION )) {
-session_start ();
-}
-if (isset ( $_SESSION ['userName'] )) {
-    header ( "location:index.php" );
-} elseif (! isset ( $_REQUEST ['username'] )) {
-    header ( "location:login.php" );
-} else {
-    $username = $_POST ['username'];
-    $passcode = $_POST ['passcode'];
+    // 退出登录
+    public function logout(){
+        \app\index\model\User::logout();
 
-    //计算摘要
-    $password2 = sha1 ( $passcode );
-
-    require_once 'dbconfig.php';
-    // 根据用户名和密码去查询帐号表
-    $sql = "select * from user where username= '$username' and password='$password2'";
-    $result = mysql_query ( $sql, $conn );
-    if ($row = mysql_fetch_array ( $result )) {
-        $_SESSION ['userName'] = $username;
-        header ( "location:index.php" );
-    } else {
-        echo "<script>alert('用户名或密码错误!');</script>";
-        echo "用户名或密码错误！<br/>";
-        echo "<a href='login.php'>重新登陆</a>";
+        if (!session('?ext_user')) {
+            header(strtolower("location: ".config("web_root")."/index/user/login"));
+            exit();
+        }
+        header(strtolower("location:login"));
+        return NULL;
     }
-}
-*/
+
 }

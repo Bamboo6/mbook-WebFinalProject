@@ -13,6 +13,7 @@
 <div data-role="page">
   <div data-role="header" >
     <a data-ajax="false" href="../index/index" data-role="button" data-icon="home">首页</a>
+      <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
     <h1>图书列表</h1>
   </div>
   <div data-role="content">
@@ -28,7 +29,7 @@
              </li>
         {/volist}
      </ul>
-      <div data-ajax="false">{$page}</div>
+      <div align="center">{$page}</div>
 
   </div>
   <div data-role="footer" data-theme="b">

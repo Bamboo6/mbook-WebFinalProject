@@ -14,7 +14,10 @@ use think\Controller;
 class Feedback extends Controller
 {
     public function feedback(){
-
+        if (!session('?ext_user')) {
+            header(strtolower("location: "."/mbook/public/index.php"."/index/user/login"));
+            exit();
+        }
         return $this->fetch();
     }
     public function feedbackdo(){
