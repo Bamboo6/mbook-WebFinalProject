@@ -7,6 +7,25 @@
 <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
 <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
 <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
+    <script>
+        /*$(document).ready(function() {
+
+            document.querySelectorAll("a").setAttribute("data-ajax","false");
+        });*/
+        $(function () {
+            var items = document.getElementsByTagName("a");
+            for(var i = 0;i<items.length;i++){
+                items[i].setAttribute('data-ajax', false);
+            }
+    })
+
+    </script>
+    <style type="text/css">
+        .pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+        .pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;}
+        .pagination .active{background-color: #dd1a20;color: #fff;}
+        .pagination .disabled{color:#aaa;}
+    </style>
 </head>
 
 <body>
@@ -29,7 +48,7 @@
              </li>
         {/volist}
      </ul>
-      <div align="center">{$page}</div>
+      <div>{$page}</div>
 
   </div>
   <div data-role="footer" data-theme="b">

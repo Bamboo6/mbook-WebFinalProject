@@ -29,7 +29,7 @@ class Book extends \think\Controller
             exit();
         }
 		$book=new \app\index\model\Book();
-
+//        str_replace("<a ", "<a data-ajax=\"false\"", "<a ");
 		$data= $book->where('s_id', input('get.sid'))->paginate(10,false,['query' => ['sid'=>input('get.sid')]]);
 		$page = $data->render();
 		$this->assign('blist',$data);
