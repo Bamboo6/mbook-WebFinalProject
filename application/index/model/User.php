@@ -15,7 +15,7 @@ class User extends Model
     public static function login($name, $password)
     {
 
-        $where['user_email'] = $name;
+        $where['user_name'] = $name;
         $where['user_pwd'] = md5($password);
 
         $user=User::where($where)->find();

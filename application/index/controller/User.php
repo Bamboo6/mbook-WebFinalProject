@@ -15,14 +15,6 @@ class User extends Controller
 		return $this->fetch();
 	}
 
-    public function info(){
-        if (!session('?ext_user')) {
-            header(strtolower("location: "."/mbook/public/index.php"."/index/user/login"));
-            exit();
-        }
-        return $this->fetch();
-    }
-
     public function login(){
         $view = new View();
         return $view->fetch('login');
@@ -126,7 +118,7 @@ class User extends Controller
         $email=\think\Request::instance()->post('email'); // email
         $answer=\think\Request::instance()->post('answer'); //answer
         $question=\think\Request::instance()->post('question'); //$question
-        $sql = Db::query('select user_answer from tb_user where user_question=?',[$question]);
+        $sql = Db::query('select user_answer from tb_user where user_email=?',[$email]);
         $string = $sql[0]['user_answer'];
         /*var_dump($question);
         var_dump($answer);
@@ -169,8 +161,8 @@ class User extends Controller
     public function logining()
     {
         $view = new View();
-        $name = input('request.email');
-        $password  = input('request.password');
+        $data1['name'] = input('request.name');
+        $data1['password']  = input('request.password');
         $data = input('request.captcha');
         dump($data);
         if(!captcha_check($data)){
@@ -179,14 +171,17 @@ class User extends Controller
         }
 
 
-        $check=\app\index\model\User::login($name, $password);
+        $check=\app\index\model\User::login($data1['name'], $data1['password']);
+
         if ($check) {
             // header(strtolower("location:"));
-            header(strtolower("location: "."/mbook/public/index.php"."/index/Index/index.html"));
+            $username = $data1['name'];
+            session('username',$username);
+            $this->assign('name',$data1['name']);
+            header(strtolower("location: ".config('web_root')."/index/Index/indexlogin.html"));
             exit();
         }
 
-        return $view->fetch('logining');
     }
 
     function captcha_img($id = "")
@@ -210,6 +205,37 @@ class User extends Controller
         } else {
             $this->error("<h1>此邮箱未绑定用户</h1>", "index/user/login");
         }
+
+    }
+
+    //个人信息
+    public function info(){
+        if (!session('?ext_user')) {
+            header(strtolower("location: ".config('web_root')."/index/user/login"));
+            exit();
+        }
+        $sex =  $u->
+        $u=new \app\index\model\User();
+        $name= session('username');
+        $r = $u->where('user_name',$name)->select();
+        $this->assign('r',$r);
+        $this->assign('name',$name);
+        return $this->fetch();
+    }
+
+    public function editdo(){
+        $u=new \app\index\model\User();
+        $username= session('username');
+        $qq=input('post.qq');
+        $phone=input('post.phone');
+        $address=input('post.address');
+
+        $data['user_qq']=$qq;
+        $data['user_tel']=$phone;
+        $data['user_address']=$address;
+
+        $u->where('user_name',$username)->update($data);
+        $this->success("<h1>修改成功</h1>","index/index/index2");
 
     }
 

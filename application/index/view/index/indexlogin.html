@@ -49,23 +49,8 @@ background-color:#FFC;
 {
   background-color:#FC0;
 }
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;/*脚部的高度*/
-  clear:both;
-}
 
 </style>
-
-  <!--<script>
-      $(function () {
-          var height=document.body.offsetHeight;//获取当前页面总高度
-          var top=height+$(".topdiv").height();//顶部页面的高度（注意height计算的高度没有把顶部嵌套的页面高度加进去）
-          $(".foot").css("top",top);//给底部页面添加绝对路径距离上面高度
-      })
-  </script>-->
 
 </head>
 
@@ -73,13 +58,16 @@ background-color:#FFC;
 <div data-role="page">
   <div data-role="header" data-theme="f">
     <h1>欢迎访问我的书店</h1>
-    <a href="../user/login" data-ajax="false" data-role="button" data-icon="info">登陆</a>
+    <a href="../user/info" data-ajax="false" data-role="button" data-icon="info"><?=$name?></a>
+    <a href="../user/logout" data-ajax="false" data-role="button" data-icon="info">退出登录</a>
 </div>
   <div data-role="content" data-theme="f">
     <div data-role="collapsible" data-collapsed="false">
-      <h1>今日特价</h1>
-      <div align="center">
-        <h3>登录即可查看特价图书</h3>
+      <h1 >今日特价</h1>
+      <div>
+         <a href='#' data-ajax="false"> <img src="/mbook/public/static/images/{$tejiabook.book_img}" /> <br/>
+        {$tejiabook.book_name}<br/>
+        <span>￥{$tejiabook.book_newprice}</span> </a>
       </div>
     </div>
     <div data-role="collapsible" data-collapsed="false">
@@ -112,7 +100,7 @@ background-color:#FFC;
       </div>
     </div>
   </div>
-  <div data-role="footer" data-theme="f" id="footer">
+  <div data-role="footer" data-theme="f">
     <h1>机电书店</h1>
   </div>
 </div>
