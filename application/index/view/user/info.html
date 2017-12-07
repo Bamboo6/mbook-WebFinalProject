@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
     <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
     <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="/mbook/public/static/jquery-ui.css">
+    <script src="/mbook/public/static/jquery-3.2.1.slim.min.js"></script>
+    <script src="/mbook/public/static/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/mbook/public/static/style.css">
+    <script>
+            $(function() {
+                $( "#datepicker" ).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'yy-mm-dd',
+                    showAnim: 'slide',
+                    showButtonPanel: true
+                });
+            });
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            $.AutoComplete('#email');
+        });
+    </script>
     <style>
         body {
             margin: 0 auto;
@@ -28,25 +48,32 @@
             border:#FF0 1px solid;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="/mbook/public/static/autoComplete.css" media="all"/>
+    <script type="text/javascript" src="/mbook/public/static/jquery.autoComplete.js"></script>
 </head>
 
 <body>
 <div data-role="page" id="page1">
     <div data-role="header" data-theme="f">
         <a href="../Index/indexlogin.html" data-ajax="false" data-role="button" data-icon="home">首页</a>
+        <a href="logout" data-ajax="false" data-role="button" data-icon="home">退出登录</a>
         <h3> 用户信息</h3>
     </div>
     <div data-role="content">
-        <form name="RegForm" method="post" action="editdo" data-ajax="false">
+        <form method="post" action="editinfo" data-ajax="false">
             <div data-role="fieldcontain">
                 <label for="username"> 用户名</label>
                 <input name="username" id="username"  value="{$name}" type="text" readonly="readonly" required>
             </div>
             <div data-role="fieldcontain">
+                <label> 真实名字</label>
+                <input name="truename" value="{$r[0]['user_truename']}" type="text" required>
+            </div>
+            <div data-role="fieldcontain">
                 <fieldset data-role="fieldcontain">
                     <label for="sex">性别</label>
                     <select name="sex" id="sex">
-                        <option value="male">男</option>
+                        <option value="{$sex}">当前数据：{$sexname}</option>
                         <option value="male">男</option>
                         <option value="female">女</option>
                         <option value="others">其他</option>
@@ -54,30 +81,44 @@
                 </fieldset>
             </div>
                 <div data-role="fieldcontain">
-                    <label for="email"> 邮箱</label>
-                    <input name="email" id="email"  value="{$r[0]['user_email']}" readonly="readonly" type="email" required>
+                    <label for="email"> 邮箱 </label>
+                    <input name="email" id="email"  value="{$r[0]['user_email']}" class="inp" autocomplete="off" type="email" required>
                 </div>
                 <div data-role="fieldcontain">
                     <label for="qq"> QQ </label>
                     <input name="qq" id="qq"  value="{$r[0]['user_qq']}" type="text" required>
-
                 </div>
                 <div data-role="fieldcontain">
                     <label for="phone"> 联系电话 </label>
                     <input name="phone" id="phone"  value="{$r[0]['user_tel']}" type="text" required>
-
+                </div>
+                <div data-role="fieldcontain">
+                    <label> 生日 </label>
+                    <input name="bir" id="datepicker" value="{$r[0]['user_bir']}" type="text" required readonly="readonly">
                 </div>
                 <div data-role="fieldcontain">
                     <label for="address"> 地址 </label>
                     <input name="address" id="address"  value="{$r[0]['user_address']}" type="text" required>
                 </div>
                 <div data-role="fieldcontain">
-                    <label for="address"> 重要信息修改 </label>
-                    <a data-inline="true" data-ajax="false"  data-role="button"  href="newpsw.html"> 修改密码 </a>
-                    <a data-inline="true" data-ajax="false"  data-role="button"  href="newpsw.html"> 修改密保 </a>
+                    <label for="regtime"> 注册时间 </label>
+                    <input name="regtime" id="regtime"  value="{$r[0]['user_regtime']}" type="text" readonly="readonly" required>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="logintime"> 登录时间 </label>
+                    <input name="logintime" id="logintime"  value="{$r[0]['user_logintime']}" type="text" readonly="readonly" required>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="ip"> 登录IP </label>
+                    <input name="ip" id="ip"  value="{$r[0]['user_ip']}" type="text" readonly="readonly" required>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="address"> 关键信息 </label>
+                    <a data-inline="true" data-ajax="false"  data-role="button"  href="changepw.html"> 修改密码 </a>
+                    <a data-inline="true" data-ajax="false"  data-role="button"  href="changequ.html"> 修改密保 </a>
                 </div>
                 <div >
-                    <input data-inline="true" type="submit" name="submit" value="提交"  />
+                    <input data-inline="true" type="submit" name="submit" value="修改"  />
                     <a data-inline="true"  data-role="button" data-ajax="false"  href="../Index/index.html"> 取消 </a>
                 </div>
         </form>

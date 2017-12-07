@@ -4,6 +4,7 @@ namespace app\index\controller;
 use function Sodium\increment;
 use think\Controller;
 use think\Db;
+use think\Request;
 use think\View;
 use think\Input;
 use Captcha;
@@ -32,6 +33,14 @@ class User extends Controller
         return $this->fetch();
     }
 
+    public function changepw(){
+        return $this->fetch();
+    }
+
+    public function changequ(){
+        return $this->fetch();
+    }
+
     public function insert(){
 		$u=new \app\index\model\User();
 		$username=\think\Request::instance()->post('username'); // 获取某个post变量username
@@ -43,6 +52,7 @@ class User extends Controller
 		$password1=input('post.repass');
 		$sex= input('post.sex'); //性别
 		$email=input('post.email');
+		$bir=input('post.bir');
 		$question=input('post.question');
 		$answer=input('post.answer');
 		if (md5($password)==md5($password1)){
@@ -50,6 +60,9 @@ class User extends Controller
 			if($sql){
 				$this->error("<h1>该用户已存在</h1>","index/user/reg");
 			}else{
+                $datetime = date("Y-m-d H:i:s");
+                $data['user_regtime']=$datetime;
+                $data['user_bir']=$bir;
                 $data['user_truename']=$truename;
                 $data['user_qq']=$qq;
                 $data['user_address']=$address;
@@ -143,7 +156,7 @@ class User extends Controller
 //        $sql = Db::query('UPDATE tb_user SET user_pwd = ? WHERE user_email = ?',[$psw][$email]);
 //        var_dump($sql);
         if ($psw == $npsw){
-            $sql = Db::execute('UPDATE tb_user SET user_pwd = ? WHERE user_email = ?',[$psw,$email]);
+            Db::execute('UPDATE tb_user SET user_pwd = ? WHERE user_email = ?',[$psw,$email]);
             /*$u=new \app\index\model\User();
             $u->user_pwd=(input('post.psw'));
             $u->save();*/
@@ -164,7 +177,6 @@ class User extends Controller
         $data1['name'] = input('request.name');
         $data1['password']  = input('request.password');
         $data = input('request.captcha');
-        dump($data);
         if(!captcha_check($data)){
             //验证失败
             return $this->error("验证码错误");
@@ -175,6 +187,11 @@ class User extends Controller
 
         if ($check) {
             // header(strtolower("location:"));
+            $datetime = date("Y-m-d H:i:s");
+            $request = Request::instance();
+            $ip = $request->ip();
+            Db::execute('UPDATE tb_user SET user_logintime = ? WHERE user_name = ?',[$datetime,$data1['name']]);
+            Db::execute('UPDATE tb_user SET user_ip = ? WHERE user_name = ?',[$ip,$data1['name']]);
             $username = $data1['name'];
             session('username',$username);
             $this->assign('name',$data1['name']);
@@ -183,6 +200,8 @@ class User extends Controller
         }
 
     }
+
+
 
     function captcha_img($id = "")
     {
@@ -199,7 +218,7 @@ class User extends Controller
             $sql = Db::query('select user_pwd from tb_user where user_email=?', [$email]);
             $psw = md5($psw);
             if ($sql == $psw) {
-                session("email",$email);
+
                 $this->success("<h1>登录成功</h1>", "index");
             }
         } else {
@@ -214,32 +233,100 @@ class User extends Controller
             header(strtolower("location: ".config('web_root')."/index/user/login"));
             exit();
         }
-        $sex =  $u->
+
         $u=new \app\index\model\User();
         $name= session('username');
+        $sex =  $u->where('user_name',$name)->value('user_sex');
         $r = $u->where('user_name',$name)->select();
+        if ($sex == "male"){
+            $sexname = "男";
+        }else if ($sex == "female"){
+            $sexname = "女";
+        }else if ($sex == "others"){
+            $sexname = "其他";
+        }else{
+            $sexname = "系统错误";
+        }
         $this->assign('r',$r);
+        $this->assign('sex',$sex);
+        $this->assign('sexname',$sexname);
         $this->assign('name',$name);
         return $this->fetch();
     }
 
-    public function editdo(){
+    public function editinfo(){
         $u=new \app\index\model\User();
         $username= session('username');
+        $truename=input('post.truename');
         $qq=input('post.qq');
-        $phone=input('post.phone');
+        $tel=input('post.tel');
         $address=input('post.address');
+        $sex= input('post.sex'); //性别
+        $email=input('post.email');
+        $bir=input('post.bir');
 
         $data['user_qq']=$qq;
-        $data['user_tel']=$phone;
+        $data['user_tel']=$tel;
         $data['user_address']=$address;
+        $data['user_truename']=$truename;
+        $data['user_sex']=$sex;
+        $data['user_email']=$email;
+        $data['user_bir']=$bir;
 
         $u->where('user_name',$username)->update($data);
-        $this->success("<h1>修改成功</h1>","index/index/index2");
+        $this->success("<h1>修改成功</h1>","index/index/indexlogin");
 
     }
 
-    // 退出登录
+    public function editpsw(){
+        $u=new \app\index\model\User();
+        $username= session('username');
+        $r = $u->where('user_name',$username)->select();
+
+        $oldpwd = $r['0']['user_pwd'];
+        $oldpassword = input("post.oldpassword");
+        $oldpassword = md5($oldpassword);
+        $newpassword = input("post.newpassword");
+        $password1=input('post.repass');
+
+        if($oldpwd==$oldpassword){
+
+            if (md5($newpassword)==md5($password1)){
+                $data['user_pwd']=md5($newpassword);
+                $u->where('user_name',$username)->update($data); // 更新数据库
+                session(null);
+                $this->success("<h1>修改成功，请重新登录</h1>","index/user/login");
+            }else{
+                $this->error("两次密码不吻合");
+            }
+        }else{
+            $this->error("原密码错误");
+
+        }
+    }
+
+    public function editqu(){
+        $u=new \app\index\model\User();
+        $username= session('username');
+        $r = $u->where('user_name',$username)->select();
+
+        $oldpwd = $r['0']['user_pwd'];
+        $oldpassword = input("post.password");
+        $oldpassword = md5($oldpassword);
+        $newqu = input("post.newqu");
+        $newan=input('post.newan');
+
+        if($oldpwd==$oldpassword){
+                $data['user_question'] = $newqu;
+                $data['user_answer'] = $newan;
+                $u->where('user_name',$username)->update($data); // 更新数据库
+                $this->success("<h1>修改成功</h1>","index/user/info");
+        }else{
+            $this->error("密码错误");
+
+        }
+    }
+
     public function logout(){
         \app\index\model\User::logout();
 

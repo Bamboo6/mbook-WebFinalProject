@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: 2017-12-03 01:21:42
+-- Generation Time: 2017-12-07 22:53:06
 -- 服务器版本： 5.6.35
--- PHP Version: 7.1.8
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -116,7 +116,8 @@ CREATE TABLE `tb_feedback` (
 
 INSERT INTO `tb_feedback` (`feedback_id`, `feedback_info`, `feedback_date`) VALUES
 (1, '123', '0000-00-00'),
-(2, '1233', '0000-00-00');
+(2, '1233', '0000-00-00'),
+(3, '132', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -189,26 +190,26 @@ CREATE TABLE `tb_user` (
   `user_truename` varchar(50) DEFAULT NULL COMMENT '真实名字',
   `user_pwd` char(50) NOT NULL COMMENT '密码',
   `user_email` varchar(50) NOT NULL COMMENT '邮箱',
-  `user_sex` char(5) NOT NULL COMMENT '性别',
+  `user_bir` date NOT NULL COMMENT '用户生日',
+  `user_sex` char(6) NOT NULL COMMENT '性别',
   `user_tel` char(20) NOT NULL COMMENT '电话',
   `user_qq` char(20) DEFAULT NULL COMMENT 'QQ',
   `user_address` varchar(100) DEFAULT NULL COMMENT '地址',
-  `user_logintimes` int(11) DEFAULT NULL COMMENT '登陆次数',
+  `user_logintime` datetime(6) DEFAULT NULL COMMENT '登陆时间',
   `user_ip` char(20) DEFAULT NULL COMMENT 'ip',
   `user_question` varchar(200) NOT NULL COMMENT '密保问题',
-  `user_answer` varchar(200) NOT NULL COMMENT '密保答案'
+  `user_answer` varchar(200) NOT NULL COMMENT '密保答案',
+  `user_regtime` datetime(6) DEFAULT NULL COMMENT '注册时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `tb_user`
 --
 
-INSERT INTO `tb_user` (`user_id`, `user_name`, `user_truename`, `user_pwd`, `user_email`, `user_sex`, `user_tel`, `user_qq`, `user_address`, `user_logintimes`, `user_ip`, `user_question`, `user_answer`) VALUES
-(1, 'a', NULL, '76d80224611fc919a5d54f0ff9fba446', 'a@aa.com', '', '', NULL, NULL, NULL, NULL, '1', '2'),
-(2, 'q', NULL, 'b2ca678b4c936f905fb82f2733f5297f', 'qq@qwe.com', 'ma', '123', '12', '1234', NULL, NULL, '', ''),
-(3, 'w', 'w', '4eae35f1b35977a00ebd8086c259d4c9', 'w@qq.com', 'ma', '34', '23', 'www', NULL, NULL, 'w', 'w'),
-(4, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@qq.com', 'male', 'admin', 'admin', 'admin', NULL, NULL, 'admin', 'admin'),
-(5, '请问', '请问', '76d80224611fc919a5d54f0ff9fba446', 'qwe@baidu.com', 'male', '123', 'qwe', '请问', NULL, NULL, '请问', '请问');
+INSERT INTO `tb_user` (`user_id`, `user_name`, `user_truename`, `user_pwd`, `user_email`, `user_bir`, `user_sex`, `user_tel`, `user_qq`, `user_address`, `user_logintime`, `user_ip`, `user_question`, `user_answer`, `user_regtime`) VALUES
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@qq.com', '0000-00-00', 'male', 'admin', 'admin', 'admin', '2017-12-07 17:09:08.000000', '0.0.0.0', 'admin', 'admin', '2017-12-01 17:17:05.000000'),
+(8, '123', '1235', '202cb962ac59075b964b07152d234b70', '123@foxmail.com', '2017-12-28', 'others', '', '12567', '多发点舒服', '2017-12-07 20:35:37.000000', '0.0.0.0', '123', '123', '2017-12-07 20:35:22.000000'),
+(9, 'gdmec', 'gdmec', 'd6ddcef1f21c466c8a35a9b84bd2bd4a', 'gdmec@163.com', '2017-12-06', 'others', '020-666666', '2010666', '广东省广州市白云区钟落潭镇马沥村', '2017-12-07 22:35:57.000000', '0.0.0.0', '移动商务开发在哪上课？', '图文楼', '2017-12-07 22:35:28.000000');
 
 --
 -- Indexes for dumped tables
@@ -269,7 +270,7 @@ ALTER TABLE `tb_book`
 -- 使用表AUTO_INCREMENT `tb_feedback`
 --
 ALTER TABLE `tb_feedback`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- 使用表AUTO_INCREMENT `tb_order`
 --
@@ -284,7 +285,7 @@ ALTER TABLE `tb_smalltype`
 -- 使用表AUTO_INCREMENT `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户Id', AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户Id', AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

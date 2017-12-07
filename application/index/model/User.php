@@ -21,6 +21,7 @@ class User extends Model
         $user=User::where($where)->find();
         if ($user) {
             unset($user["password"]);
+
             session("ext_user", $user);
             return true;
         }else{

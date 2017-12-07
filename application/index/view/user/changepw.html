@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>修改密保</title>
+    <title>用户信息</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
     <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
@@ -44,18 +44,18 @@
         <h3> 修改密码 </h3>
     </div>
     <div data-role="content">
-        <form method="post" action="editqu" data-ajax="false">
+        <form method="post" action="editpsw" data-ajax="false">
             <div data-role="fieldcontain">
-                <label for="password"> 密码 </label>
-                <input name="password" id="password" placeholder="" value="" type="password" required>
+                <label for="oldpassword"> 原密码 </label>
+                <input name="oldpassword" id="oldpassword" placeholder="" value="" type="password" required>
             </div>
             <div data-role="fieldcontain">
-                <label for="newqu"> 新密保问题 </label>
-                <input name="newqu" id="newqu" placeholder="" value="" type="text" required>
+                <label for="newpassword"> 新密码 </label>
+                <input name="newpassword" id="newpassword" placeholder="" value="" type="password" required>
             </div>
             <div data-role="fieldcontain">
-                <label for="newan"> 新密保答案 </label>
-                <input name="newan" id="newan" placeholder="" value="" type="text" required>
+                <label for="repass"> 确认密码 </label>
+                <input name="repass" id="repass" placeholder="" value="" type="password" required>
             </div>
 
             <div >

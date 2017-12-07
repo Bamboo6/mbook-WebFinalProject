@@ -7,7 +7,7 @@ class Index  extends \think\Controller
     public function indexlogin()
     {
         if (!session('?ext_user')) {
-            header(strtolower("location: ".config('web_root')."/index/user/login"));
+            header(strtolower("location: ".config('web_root')."/index/index/index"));
             exit();
         }
         $book = new \app\index\model\Book();
@@ -18,7 +18,15 @@ class Index  extends \think\Controller
         return $this->fetch();
     }
 
+    public function notice(){
+        return $this->fetch();
+    }
+
     public function index(){
+        if (session('?ext_user')) {
+            header(strtolower("location: "."/mbook/public/index.php"."/index/index/indexlogin"));
+            exit();
+        }
         return $this->fetch();
     }
 }

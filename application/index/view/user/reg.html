@@ -7,7 +7,30 @@
 <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
 <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
 <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
-
+  <link rel="stylesheet" href="/mbook/public/static/jquery-ui.css">
+  <script src="/mbook/public/static/jquery-3.2.1.slim.min.js"></script>
+  <script src="/mbook/public/static/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/mbook/public/static/style.css">
+  <script>
+      $(function() {
+          $(function() {
+              $( "#datepicker" ).datepicker({
+                  changeMonth: true,
+                  changeYear: true,
+                  dateFormat: 'yy-mm-dd',
+                  showAnim: 'slide',
+                  showButtonPanel: true
+              });
+          });
+      });
+  </script>
+  <script type="text/javascript">
+      $(function(){
+          $.AutoComplete('#email');
+      });
+  </script>
+  <link rel="stylesheet" type="text/css" href="/mbook/public/static/autoComplete.css" media="all"/>
+  <script type="text/javascript" src="/mbook/public/static/jquery.autoComplete.js"></script>
 </head>
 
 <body>
@@ -48,7 +71,11 @@
       </div>
       <div data-role="fieldcontain">
         <label for="email"> 邮箱 </label>
-        <input name="email" id="email"  value="" type="email" required>
+        <input name="email" id="email"  value="" type="email" class="inp" autocomplete="off" required>
+      </div>
+      <div data-role="fieldcontain">
+        <label> 生日 </label>
+        <input name="bir" id="datepicker"  value="" type="text" required readonly="readonly">
       </div>
       <div data-role="fieldcontain">
         <label for="qq"> QQ </label>

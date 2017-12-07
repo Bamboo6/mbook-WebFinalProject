@@ -50,6 +50,14 @@ background-color:#FFC;
   background-color:#FC0;
 }
 
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;/*脚部的高度*/
+  clear:both;
+}
+
 </style>
 
 </head>
@@ -85,12 +93,12 @@ background-color:#FFC;
           <span>用户信息</span><br/>
           <br/>
           </a> </div>
-        <div class="ui-block-a"> <a href="#"> <img  src="/mbook/public/static/images/neTool04.jpg" alt="sdgg" /><br/>
+        <div class="ui-block-a"> <a href="../index/notice" data-ajax="false"> <img  src="/mbook/public/static/images/neTool04.jpg" alt="sdgg" /><br/>
           <span>书店公告</span><br/>
           <br/>
           </a> </div>
-        <div class="ui-block-b"> <a href="#"> <img  src="/mbook/public/static/images/neTool05.jpg" alt="bzzx" /><br/>
-          <span>帮助中心</span><br/>
+        <div class="ui-block-b"> <a href="../search/search" data-ajax="false"> <img  src="/mbook/public/static/images/neTool05.jpg" alt="bzzx" /><br/>
+          <span>书目搜索</span><br/>
           <br/>
           </a> </div>
         <div class="ui-block-c"> <a href="../feedback/feedback" data-ajax="false"> <img  src="/mbook/public/static/images/neTool06.jpg" alt="yjfk" /><br/>
@@ -100,7 +108,7 @@ background-color:#FFC;
       </div>
     </div>
   </div>
-  <div data-role="footer" data-theme="f">
+  <div data-role="footer" data-theme="f" id="footer">
     <h1>机电书店</h1>
   </div>
 </div>

@@ -1,28 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
+
+
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>意见反馈</title>
+    <meta charset="utf-8">
+    <title>留言板</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
     <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
     <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var items = document.getElementsByTagName("a");
+            for(var i=0;i<items.length;i++){
+                items[i].setAttribute('data-ajax',false);
+            }
+        })
+    </script>
+    <style>
+        body {
+            margin: 0 auto;
+            text-align:center;
+            padding:0;
+        }
+        div, ul, li, dl, dt, dd, h1, h2, h3, h4, p {
+            margin:0;
+            padding:0;
+            list-style:none;
+        }
+        a {
+            text-decoration:none;
+        }
+
+        .ui-bar-f
+        {
+            background-color:#FF6;
+            border:#FF0 1px solid;
+        }
+        .ui-bar-f .ui-btn
+        {
+            background-color:#FC0;
+        }
+        .ui-bar-f .ui-btn:hover
+        {
+            background-color:#FC9;
+        }
+        .ui-body-f
+        {
+            background-color:#FFC;
+        }
+        .ui-body-f .ui-btn
+        {
+            background-color:#FC0;
+        }
+        .ui-body-f .ui-btn:hover
+        {
+            background-color:#FC0;
+        }
+
+    </style>
+    <style type="text/css">
+        .pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+        .pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;}
+        .pagination .active{background-color: #dd1a20;color: #fff;}
+        .pagination .disabled{color:#aaa;}
+    </style>
 </head>
 <body>
-<div data-role="header">
-    <a href="../index/index" data-ajax="false" data-role="button" data-icon="home">首页</a>
-    <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
-    <h3 id="feedback1"> 意见反馈 </h3>
-</div>
-    <div data-role="content">
-        <form method="post" action="feedbackdo" data-ajax="false">
-                <div data-role="fieldcontain" align="center">
-                <p> 做得不够的请多担待，欢迎提出您宝贵的建议或意见 </p>
-                <textarea name="feedback" id="feedback"></textarea>
-                <input type="submit" data-inline="true" value="提交">
-            </div>
-        </form>
+<div data-role="page">
+    <div data-role="header" data-theme="f">
+        <h1>意见反馈</h1>
+        <a href="../Index/indexlogin.html" data-ajax="false" data-role="button" data-icon="home">首页</a>
+        <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
     </div>
+    <div data-role="content" data-theme="f">
+        <div data-role="collapsible" data-collapsed="false">
+            <h1 >会员反馈板</h1>
+            <div>
+                {volist name='r' id='m'}
 
+                <div data-role="fieldcontain">
+                    <label>反馈人</label>
+                    <label>{$m.feedback_username}</label>
+
+                </div>
+                <div data-role="fieldcontain">
+                    <label>反馈内容</label>
+                    <label>{$m.feedback_info}</label>
+
+                </div>
+                <hr>
+                {/volist}
+                {$page}
+            </div>
+        </div>
+        <div data-role="collapsible" data-collapsed="false">
+            <h1>做得不够的请多担待，欢迎提出您宝贵的建议或意见</h1>
+            <div class="ui-grid-b">
+                <form method="post" action="feedbackdo" data-ajax="false">
+                    <div data-role="fieldcontain" align="center">
+                        <textarea name="feedback" id="feedback"></textarea>
+                        <input type="submit" data-inline="true" value="提交">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div data-role="footer" data-theme="f">
+        <h1>机电书店</h1>
+    </div>
+</div>
 </body>
 </html>
