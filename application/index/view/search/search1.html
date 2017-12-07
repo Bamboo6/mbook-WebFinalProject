@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品搜索</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
+    <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
+    <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var xhr = null;
+            $('.zhuce_gongsimingcheng').keyup(function() {
+                if (xhr) {
+                    xhr.abort(); //如果存在ajax的请求，就放弃请求
+                }
+                var inputText = $.trim(this.value);
+                if (inputText != "") { //检测键盘输入的内容是否为空，为空就不发出请求
+                    xhr = $.ajax({
+                        type: 'GET',
+                        url: '../search/get_ajax_crmname',
+                        cache: false,
+                        //不从浏览器缓存中加载请求信息
+                        data: "keyword=" + inputText,
+                        //向服务器端发送的数据
+                        dataType: 'json',
+                        //服务器返回数据的类型为json
+                        success: function(json) {
+                        if (json.length != 0) { //检测返回的结果是否为空
+                            var lists = "<ul>";
+                            $.each(json,
+                                function() {
+                                    lists += "<li>" + this.book_name + "</li>"; //遍历出每一条返回的数据
+                                });
+                            lists += "</ul>";
+                            $("#searchBox").html(lists).show(); //将搜索到的结果展示出来
+                            $('li').live('click',function(){
+                                $(".zhuce_gongsimingcheng").val($(this).text()); //点击某个li就会获取当前的值
+                                $("#searchBox").hide();
+                            });
+                        } else {
+                            $("#searchBox").hide();
+                        }
+                    }
+                });
+                } else {
+                    $("#searchBox").hide(); //没有查询结果就隐藏搜索框
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div data-role="header">
+    <a href="../index/index" data-ajax="false" data-role="button" data-icon="home">首页</a>
+    <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
+    <h3> 商品搜索 </h3>
+</div>
+
+<div>
+    <form method="post" data-ajax="false">
+    <div>
+        <input type="text" name="keyword"/>
+    </div>
+        <button type="submit" id="submit_from" data-ajax="false">搜索</button>
+    </form>
+    <div id="searchBox" display="none"></div>
+</div>
+
+</body>
+</html>
+

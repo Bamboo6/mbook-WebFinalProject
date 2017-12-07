@@ -7,7 +7,20 @@
     <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
     <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
     <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
-
+    <script>
+        $(function () {
+            var items = document.getElementsByTagName("a");
+            for(var i = 0;i<items.length;i++){
+                items[i].setAttribute('data-ajax', false);
+            }
+        })
+    </script>
+    <style type="text/css">
+        .pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+        .pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;}
+        .pagination .active{background-color: #dd1a20;color: #fff;}
+        .pagination .disabled{color:#aaa;}
+    </style>
     <style>
         body {
             margin: 0 auto;
@@ -19,6 +32,7 @@
             padding:0;
             list-style:none;
         }
+
         a {
             text-decoration:none;
         }
@@ -56,16 +70,38 @@
     <div data-role="header" data-theme="f">
         <h1>书目搜索</h1>
         <a href="../Index/indexlogin.html" data-ajax="false" data-role="button" data-icon="home">首页</a>
-        <a href="{:url('user/loginout')}" data-ajax="false" data-role="button" data-icon="info">退出登陆</a>
     </div>
     <form method="get" action="searchdo" data-ajax="false">
         <div data-role="fieldcontain">
-            <input name="keyword" placeholder="请输入关键词" id="keyword" type="text" required>
+            <input name="keyword" placeholder="请输入关键词" id="keyword" type="text" value="{$keyword ? $keyword : '';}" required>
         </div>
         <div data-role="fieldcontain">
-            <input data-inline="true" type="submit" name="submit" value="搜索" />
+            <input data-inline="true" type="submit" name="submit" value="搜索" data-ajax="false"/>
         </div>
     </form>
+    <div data-role="content" align="center">
+        <table width="auto" border="1px" >
+
+            <tr>
+                <th>名称</th>
+                <th>作者</th>
+                <th>ISBN</th>
+                <th>原价</th>
+                <th>现价</th>
+            </tr>
+            {volist name='result' id='sdata' empty="暂未查到此数据"}
+            <tr align="center">
+                <td style="word-break:break-all;">{$sdata.book_name}</td>
+                <td style="word-break:break-all;">{$sdata.book_author}</td>
+                <td style="word-break:break-all;">{$sdata.book_isbn}</td>
+                <td>￥{$sdata.book_oldprice}</td>
+                <td>￥{$sdata.book_newprice}</td>
+            </tr>
+            {/volist}
+        </table>
+        <div>{$page}</div>
+
+    </div>
 </div>
 </body>
 </html>
