@@ -7,26 +7,8 @@
     <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
     <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
     <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="/mbook/public/static/common.css" >
     <style>
-        body {
-            margin: 0 auto;
-            text-align:center;
-            padding:0;
-        }
-        div, ul, li, dl, dt, dd, h1, h2, h3, h4, p {
-            margin:0;
-            padding:0;
-            list-style:none;
-        }
-        a {
-            text-decoration:none;
-        }
-
-        .ui-bar-f
-        {
-            background-color:#FF6;
-            border:#FF0 1px solid;
-        }
         #footer {
             position: absolute;
             bottom: 0;
@@ -41,9 +23,10 @@
 <div data-role="page" id="page1">
     <div data-role="header" data-theme="f">
         <a href="../Index/indexlogin.html" data-ajax="false" data-role="button" data-icon="home">首页</a>
+        <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
         <h3> 修改密码 </h3>
     </div>
-    <div data-role="content">
+    <div data-role="content" data-theme="f" style="height:100% ; width:92%; position:fixed;">
         <form method="post" action="editqu" data-ajax="false">
             <div data-role="fieldcontain">
                 <label for="password"> 密码 </label>

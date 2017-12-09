@@ -7,6 +7,49 @@
 <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
 <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
 <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+        body {
+            margin: 0 auto;
+            text-align:center;
+            padding:0;
+        }
+        div, ul, li, dl, dt, dd, h1, h2, h3, h4, p {
+            margin:0;
+            padding:0;
+            list-style:none;
+        }
+
+        a {
+            text-decoration:none;
+        }
+
+        .ui-bar-f
+        {
+            background-color:#a6e1ec;
+            border:#bce8f1 1px solid;
+        }
+        .ui-bar-f .ui-btn
+        {
+            background-color:#5bc0de;
+        }
+        .ui-bar-f .ui-btn:hover
+        {
+            background-color:#6eb6fe;
+        }
+        .ui-body-f
+        {
+            background-color:#bce8f1;
+        }
+        .ui-body-f .ui-btn
+        {
+
+        }
+        .ui-body-f .ui-btn:hover
+        {
+            background-color:#a6e1ec;
+        }
+
+    </style>
     <script>
         /*$(document).ready(function() {
 
@@ -22,20 +65,20 @@
     </script>
     <style type="text/css">
         .pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
-        .pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;}
-        .pagination .active{background-color: #dd1a20;color: #fff;}
+        .pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;background-color: #fff}
+        .pagination .active{background-color: #22aadd;color: #fff;}
         .pagination .disabled{color:#aaa;}
     </style>
 </head>
 
 <body>
 <div data-role="page">
-  <div data-role="header" >
+  <div data-role="header" data-theme="f">
     <a data-ajax="false" href="../index/index" data-role="button" data-icon="home">首页</a>
       <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
     <h1>图书列表</h1>
   </div>
-  <div data-role="content">
+  <div data-role="content" data-theme="f">
      <ul data-role="listview"  data-inset="true" >
         {volist name='blist' id='bdata'}
              <li>
@@ -51,7 +94,7 @@
       <div>{$page}</div>
 
   </div>
-  <div data-role="footer" data-theme="b">
+  <div data-role="footer" data-theme="f">
     <h1>机电书店</h1>
   </div>
 </div>

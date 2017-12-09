@@ -81,31 +81,6 @@ class User extends Controller
 		}		
     }
 
-    public function insert2(){
-        $data['user_name']=\think\Request::instance()->post('username'); // 获取某个post变量username
-        $data['user_truename']=input('post.truename');
-        $data['user_qq']=input('post.qq');
-        $data['user_address']=input('post.address');
-        $data['user_pwd']=input('post.password');
-        $data['repass']=input('post.repass');
-        $data['user_sex']=input('post.sex'); //性别
-        $data['user_email']=input('post.email');
-
-        $validate = \think\Loader::validate('User');
-        if(!$validate->check($data)){
-            //echo '<h1>'.$validate->getError().' 点击此处 <a href="javascript:history.back(-1);">返回</a></h1>';
-            $this->error($validate->getError());
-        }
-
-        $u=new \app\index\model\User();
-        $u->user_name=\think\Request::instance()->post('username');
-        $u->user_pwd=md5(input('post.password'));
-        $u->user_sex=input('post.gender'); //性别
-        $u->user_email=input('post.email');
-        $u->save();
-        $this->success("<h1>注册成功</h1>","index/user/login");
-    }
-
     public function getuseremail(){
         $view = new View();
         $u=new \app\index\model\User();
@@ -113,11 +88,6 @@ class User extends Controller
         $sql=$u->where('user_email',$email)->find();
         if($sql){
             $result = Db::query('select user_question from tb_user where user_email=?',[$email]);
-            //$string=implode($result);
-            //$String = (string)$result;
-            //var_dump($string);
-            //$this->assign('result',$result);
-            //$view->name = 'thinkphp';
             $view->email = $email;
             $view->result = $result;
             return $view->fetch('user/findpsw');
@@ -133,9 +103,7 @@ class User extends Controller
         $question=\think\Request::instance()->post('question'); //$question
         $sql = Db::query('select user_answer from tb_user where user_email=?',[$email]);
         $string = $sql[0]['user_answer'];
-        /*var_dump($question);
-        var_dump($answer);
-        var_dump($sql);*/
+
         if ($answer == $string){
             $view->email = $email;
             return $view->fetch('user/newpsw');
@@ -153,18 +121,8 @@ class User extends Controller
         $npsw=\think\Request::instance()->post('npsw'); //newpassword
         $psw=md5($psw);
         $npsw=md5($npsw);
-//        $sql = Db::query('UPDATE tb_user SET user_pwd = ? WHERE user_email = ?',[$psw][$email]);
-//        var_dump($sql);
         if ($psw == $npsw){
             Db::execute('UPDATE tb_user SET user_pwd = ? WHERE user_email = ?',[$psw,$email]);
-            /*$u=new \app\index\model\User();
-            $u->user_pwd=(input('post.psw'));
-            $u->save();*/
-            /*$sql = Db::table('tb_user')
-                    ->where('user_email:email',['email'=>$email])
-                    ->update(['user_pwd' => $psw]);*/
-            /*$u=new \app\index\model\User();
-            $u->save(['user_pwd' => $psw],['user_email' => $email]);*/
             $this->success("<h1>修改成功</h1>","index/user/login");
         }else{
             $this->error("<h1>两次输入的密码吻合</h1>","index/user/login");
@@ -186,7 +144,6 @@ class User extends Controller
         $check=\app\index\model\User::login($data1['name'], $data1['password']);
 
         if ($check) {
-            // header(strtolower("location:"));
             $datetime = date("Y-m-d H:i:s");
             $request = Request::instance();
             $ip = $request->ip();
@@ -197,6 +154,8 @@ class User extends Controller
             $this->assign('name',$data1['name']);
             header(strtolower("location: ".config('web_root')."/index/Index/indexlogin.html"));
             exit();
+        }else if(!$check){
+            $this->error("<h1>用户名或密码错误！</h1>","index/user/login");
         }
 
     }

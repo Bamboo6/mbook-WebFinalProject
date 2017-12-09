@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: 2017-12-07 22:53:06
+-- Generation Time: 2017-12-08 10:06:24
 -- 服务器版本： 5.6.35
 -- PHP Version: 5.6.31
 
@@ -105,19 +105,25 @@ INSERT INTO `tb_book` (`book_id`, `book_name`, `book_author`, `book_isbn`, `book
 --
 
 CREATE TABLE `tb_feedback` (
-  `feedback_id` int(11) NOT NULL,
-  `feedback_info` varchar(5000) NOT NULL,
-  `feedback_date` date NOT NULL
+  `feedback_id` int(11) NOT NULL COMMENT '反馈id',
+  `feedback_username` varchar(10) CHARACTER SET utf8 NOT NULL COMMENT '反馈用户',
+  `feedback_info` text CHARACTER SET utf8 NOT NULL COMMENT '反馈内容',
+  `feedback_time` datetime NOT NULL COMMENT '反馈时间',
+  `feedback_isshow` int(2) NOT NULL COMMENT '是否可见'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- 转存表中的数据 `tb_feedback`
 --
 
-INSERT INTO `tb_feedback` (`feedback_id`, `feedback_info`, `feedback_date`) VALUES
-(1, '123', '0000-00-00'),
-(2, '1233', '0000-00-00'),
-(3, '132', '0000-00-00');
+INSERT INTO `tb_feedback` (`feedback_id`, `feedback_username`, `feedback_info`, `feedback_time`, `feedback_isshow`) VALUES
+(1, '', '123', '0000-00-00 00:00:00', 0),
+(2, '', '1233', '0000-00-00 00:00:00', 0),
+(3, '', '132', '0000-00-00 00:00:00', 0),
+(4, 'gdmec', '书店很棒', '2017-12-07 23:35:54', 1),
+(5, 'gdmec', '服务很好', '2017-12-07 23:36:18', 1),
+(6, 'gdmec', '质量不错', '2017-12-07 23:42:40', 1),
+(7, 'gdmec', '种类繁多', '2017-12-07 23:45:52', 1);
 
 -- --------------------------------------------------------
 
@@ -207,9 +213,10 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`user_id`, `user_name`, `user_truename`, `user_pwd`, `user_email`, `user_bir`, `user_sex`, `user_tel`, `user_qq`, `user_address`, `user_logintime`, `user_ip`, `user_question`, `user_answer`, `user_regtime`) VALUES
-(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@qq.com', '0000-00-00', 'male', 'admin', 'admin', 'admin', '2017-12-07 17:09:08.000000', '0.0.0.0', 'admin', 'admin', '2017-12-01 17:17:05.000000'),
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@qq.com', '2010-10-21', 'male', '232323', 'admin', 'admin', '2017-12-08 09:38:51.000000', '0.0.0.0', 'admin', 'admin', '2017-12-01 17:17:05.000000'),
 (8, '123', '1235', '202cb962ac59075b964b07152d234b70', '123@foxmail.com', '2017-12-28', 'others', '', '12567', '多发点舒服', '2017-12-07 20:35:37.000000', '0.0.0.0', '123', '123', '2017-12-07 20:35:22.000000'),
-(9, 'gdmec', 'gdmec', 'd6ddcef1f21c466c8a35a9b84bd2bd4a', 'gdmec@163.com', '2017-12-06', 'others', '020-666666', '2010666', '广东省广州市白云区钟落潭镇马沥村', '2017-12-07 22:35:57.000000', '0.0.0.0', '移动商务开发在哪上课？', '图文楼', '2017-12-07 22:35:28.000000');
+(9, 'gdmec', 'gdmec', 'd6ddcef1f21c466c8a35a9b84bd2bd4a', 'gdmec@163.com', '2017-12-06', 'others', '020-666666', '2010666', '广东省广州市白云区钟落潭镇马沥村', '2017-12-08 09:58:37.000000', '0.0.0.0', '移动商务网站开发在哪上课？', '图文楼', '2017-12-07 22:35:28.000000'),
+(10, 'qwe', 'qwe', '76d80224611fc919a5d54f0ff9fba446', 'qweqw@126.com', '2017-12-20', 'female', '123', '2312', 'qwe', NULL, NULL, '123', '123', '2017-12-08 09:58:19.000000');
 
 --
 -- Indexes for dumped tables
@@ -270,7 +277,7 @@ ALTER TABLE `tb_book`
 -- 使用表AUTO_INCREMENT `tb_feedback`
 --
 ALTER TABLE `tb_feedback`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '反馈id', AUTO_INCREMENT=8;
 --
 -- 使用表AUTO_INCREMENT `tb_order`
 --
@@ -285,7 +292,7 @@ ALTER TABLE `tb_smalltype`
 -- 使用表AUTO_INCREMENT `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户Id', AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户Id', AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -7,48 +7,15 @@
     <link rel="stylesheet" href="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.css" >
     <script src="/mbook/public/static/JQM/jquery-1.11.1.min.js"></script>
     <script src="/mbook/public/static/JQM/jquery.mobile-1.4.5.min.js"></script>
-
+    <link rel="stylesheet" href="/mbook/public/static/common.css" >
     <style>
-        body {
-            margin: 0 auto;
-            text-align:center;
-            padding:0;
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;/*脚部的高度*/
+            clear:both;
         }
-        div, ul, li, dl, dt, dd, h1, h2, h3, h4, p {
-            margin:0;
-            padding:0;
-            list-style:none;
-        }
-        a {
-            text-decoration:none;
-        }
-
-        .ui-bar-f
-        {
-            background-color:#FF6;
-            border:#FF0 1px solid;
-        }
-        .ui-bar-f .ui-btn
-        {
-            background-color:#FC0;
-        }
-        .ui-bar-f .ui-btn:hover
-        {
-            background-color:#FC9;
-        }
-        .ui-body-f
-        {
-            background-color:#FFC;
-        }
-        .ui-body-f .ui-btn
-        {
-            background-color:#FC0;
-        }
-        .ui-body-f .ui-btn:hover
-        {
-            background-color:#FC0;
-        }
-
     </style>
 </head>
 <body>
@@ -56,16 +23,21 @@
     <div data-role="header" data-theme="f">
         <h1>书目搜索</h1>
         <a href="../Index/indexlogin.html" data-ajax="false" data-role="button" data-icon="home">首页</a>
-        <a href="{:url('user/loginout')}" data-ajax="false" data-role="button" data-icon="info">退出登陆</a>
+        <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
     </div>
-    <form method="get" action="searchdo" data-ajax="false">
+    <div data-role="content"  data-theme="f" style="height:100% ; width:92%; position:fixed;">
         <div data-role="fieldcontain">
-            <input name="keyword" placeholder="请输入关键词" id="keyword" type="text" required>
+            <form method="get" action="searchdo" data-ajax="false">
+                <div data-role="fieldcontain">
+                    <input name="keyword" placeholder="请输入关键词" id="keyword" type="text" required>
+                    <input data-inline="true" type="submit" name="submit" value="搜索" />
+                </div>
+            </form>
         </div>
-        <div data-role="fieldcontain">
-            <input data-inline="true" type="submit" name="submit" value="搜索" />
-        </div>
-    </form>
+    </div>
+    <div data-role="footer" data-theme="f" id="footer">
+        <h1>机电书店</h1>
+    </div>
 </div>
 </body>
 </html>

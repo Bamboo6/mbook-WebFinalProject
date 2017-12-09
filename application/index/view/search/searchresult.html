@@ -17,69 +17,29 @@
     </script>
     <style type="text/css">
         .pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
-        .pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;}
-        .pagination .active{background-color: #dd1a20;color: #fff;}
+        .pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;background-color: #fff}
+        .pagination .active{background-color: #22aadd;color: #fff;}
         .pagination .disabled{color:#aaa;}
     </style>
-    <style>
-        body {
-            margin: 0 auto;
-            text-align:center;
-            padding:0;
-        }
-        div, ul, li, dl, dt, dd, h1, h2, h3, h4, p {
-            margin:0;
-            padding:0;
-            list-style:none;
-        }
-
-        a {
-            text-decoration:none;
-        }
-
-        .ui-bar-f
-        {
-            background-color:#FF6;
-            border:#FF0 1px solid;
-        }
-        .ui-bar-f .ui-btn
-        {
-            background-color:#FC0;
-        }
-        .ui-bar-f .ui-btn:hover
-        {
-            background-color:#FC9;
-        }
-        .ui-body-f
-        {
-            background-color:#FFC;
-        }
-        .ui-body-f .ui-btn
-        {
-            background-color:#FC0;
-        }
-        .ui-body-f .ui-btn:hover
-        {
-            background-color:#FC0;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/mbook/public/static/common.css" >
 </head>
 <body>
 <div data-role="page">
     <div data-role="header" data-theme="f">
         <h1>书目搜索</h1>
         <a href="../Index/indexlogin.html" data-ajax="false" data-role="button" data-icon="home">首页</a>
+        <a href="javascript:history.back(-1);" data-ajax="false" data-role="button" data-icon="info">返回</a>
     </div>
-    <form method="get" action="searchdo" data-ajax="false">
-        <div data-role="fieldcontain">
-            <input name="keyword" placeholder="请输入关键词" id="keyword" type="text" value="{$keyword ? $keyword : '';}" required>
-        </div>
-        <div data-role="fieldcontain">
-            <input data-inline="true" type="submit" name="submit" value="搜索" data-ajax="false"/>
-        </div>
-    </form>
-    <div data-role="content" align="center">
+    <div data-role="content" align="center" data-theme="f">
+        <form method="get" action="searchdo" data-ajax="false">
+            <div data-role="fieldcontain">
+                <input name="keyword" placeholder="请输入关键词" id="keyword" type="text" value="{$keyword ? $keyword : '';}" required>
+                <input data-inline="true" type="submit" name="submit" value="搜索"/>
+            </div>
+        </form>
+    </div>
+    <div data-role="content" align="center" data-theme="f">
+        <label>搜索结果</label>
         <table width="auto" border="1px" >
 
             <tr>
@@ -101,6 +61,9 @@
         </table>
         <div>{$page}</div>
 
+    </div>
+    <div data-role="footer" data-theme="f">
+        <h1>机电书店</h1>
     </div>
 </div>
 </body>

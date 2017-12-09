@@ -27,27 +27,7 @@
             $.AutoComplete('#email');
         });
     </script>
-    <style>
-        body {
-            margin: 0 auto;
-            text-align:center;
-            padding:0;
-        }
-        div, ul, li, dl, dt, dd, h1, h2, h3, h4, p {
-            margin:0;
-            padding:0;
-            list-style:none;
-        }
-        a {
-            text-decoration:none;
-        }
-
-        .ui-bar-f
-        {
-            background-color:#FF6;
-            border:#FF0 1px solid;
-        }
-    </style>
+    <link rel="stylesheet" href="/mbook/public/static/common.css" >
     <link rel="stylesheet" type="text/css" href="/mbook/public/static/autoComplete.css" media="all"/>
     <script type="text/javascript" src="/mbook/public/static/jquery.autoComplete.js"></script>
 </head>
@@ -59,7 +39,7 @@
         <a href="logout" data-ajax="false" data-role="button" data-icon="home">退出登录</a>
         <h3> 用户信息</h3>
     </div>
-    <div data-role="content">
+    <div data-role="content" data-theme="f">
         <form method="post" action="editinfo" data-ajax="false">
             <div data-role="fieldcontain">
                 <label for="username"> 用户名</label>
@@ -89,8 +69,8 @@
                     <input name="qq" id="qq"  value="{$r[0]['user_qq']}" type="text" required>
                 </div>
                 <div data-role="fieldcontain">
-                    <label for="phone"> 联系电话 </label>
-                    <input name="phone" id="phone"  value="{$r[0]['user_tel']}" type="text" required>
+                    <label for="tel"> 联系电话 </label>
+                    <input name="tel" id="tel"  value="{$r[0]['user_tel']}" type="text" required>
                 </div>
                 <div data-role="fieldcontain">
                     <label> 生日 </label>

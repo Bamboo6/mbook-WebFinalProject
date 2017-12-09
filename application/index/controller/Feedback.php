@@ -14,6 +14,10 @@ use think\Controller;
 class Feedback extends Controller
 {
     public function feedback(){
+        if (!session('?ext_user')) {
+            header(strtolower("location: "."/mbook/public/index.php"."/index/user/login"));
+            exit();
+        }
         $m=new \app\index\model\Feedback();
         $r = $m->where('feedback_isshow',1)->paginate(3);
         $page = $r->render();
